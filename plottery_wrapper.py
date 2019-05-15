@@ -831,12 +831,17 @@ def print_yield_tex_table_from_list(hists, outputname, prec=2, caption="PUT YOUR
 def print_yield_table(hdata, hbkgs, hsigs, hsyst, options):
     hists = []
     hists.extend(hbkgs)
-    hists.extend(hsigs)
     htotal = None
+    htotalS = None
     if len(hbkgs) != 0:
         htotal = get_total_hist(hbkgs)
-        htotal.SetName("Total")
+        htotal.SetName("TotalB")
         hists.append(htotal)
+    hists.extend(hsigs)
+    if len(hsigs) != 0:
+        htotalS = get_total_hist(hsigs)
+        htotalS.SetName("TotalS")
+        hists.append(htotalS)
     if hdata and len(hbkgs) != 0:
         #print hdata
         #hratio = makeRatioHist(hdata, hbkgs)

@@ -831,17 +831,22 @@ def print_yield_tex_table_from_list(hists, outputname, prec=2, caption="PUT YOUR
 def print_yield_table(hdata, hbkgs, hsigs, hsyst, options):
     hists = []
     hists.extend(hbkgs)
-    htotal = None
+    htotalB = None
     htotalS = None
+    htotal = None
+    hists_MC = []
     if len(hbkgs) != 0:
-        htotal = get_total_hist(hbkgs)
-        htotal.SetName("TotalB")
-        hists.append(htotal)
+        htotalB = get_total_hist(hbkgs)
+        htotalB.SetName("TotalB")
+        hists.append(htotalB)
+	hists_MC.append(htotalB)
     hists.extend(hsigs)
     if len(hsigs) != 0:
         htotalS = get_total_hist(hsigs)
         htotalS.SetName("TotalS")
         hists.append(htotalS)
+        hists_MC.append(htotalS)
+    htotal = get_total_hist(hists_MC)
     if hdata and len(hbkgs) != 0:
         #print hdata
         #hratio = makeRatioHist(hdata, hbkgs)
@@ -1171,8 +1176,8 @@ def plot_hist(data=None, bgs=[], sigs=[], syst=None, options={}, colors=[], sig_
     if not "yaxis_noexponents"              in options: options["yaxis_noexponents"]              = False
     if not "yaxis_exponent_offset"          in options: options["yaxis_exponent_offset"]          = -0.1
     if not "yaxis_exponent_vertical_offset" in options: options["yaxis_exponent_vertical_offset"] = 0.02
-    if not "yaxis_ndivisions"               in options: options["yaxis_ndivisions"]               = 508
-    if not "xaxis_ndivisions"               in options: options["xaxis_ndivisions"]               = 508
+    if not "yaxis_ndivisions"               in options: options["yaxis_ndivisions"]               = 505
+    if not "xaxis_ndivisions"               in options: options["xaxis_ndivisions"]               = 505
     if not "max_digits"                     in options: options["max_digits"]                     = 4
     if not "xaxis_label"                    in options: options["xaxis_label"]                    = xaxis_label
     if not "ratio_xaxis_title"              in options: options["ratio_xaxis_title"]              = xaxis_label
